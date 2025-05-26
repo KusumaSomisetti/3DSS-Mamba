@@ -2,7 +2,7 @@ import torch
 import os
 from config import config
 os.environ["CUDA_VISIBLE_DEVICES"] = config.gpus
-
+import h5py
 import numpy as np
 import scipy.io as sio
 from sklearn.decomposition import PCA
@@ -30,9 +30,16 @@ def loadData():
         data = sio.loadmat('./data/Houston2018/houstonU2018.mat')['houstonU']
         labels = sio.loadmat('./data/Houston2018/houstonU2018.mat')['houstonU_gt']
 
-    elif config.data == 'Houston2013':
-        data = sio.loadmat('./data/Houston2013/HustonU_IM.mat')['hustonu']
-        labels = sio.loadmat('./data/Houston2013/HustonU_gt.mat')['hustonu_gt']
+    elif config.data == 'Houston':
+        # Load hyperspectral data
+        with h5py.File('./data/Houston/Houston13.mat', 'r') as f:
+            print("Houston13.mat keys:", list(f.keys()))
+            data = np.array(f['ori_data']).transpose(2, 1, 0)  # from (rows, cols, bands) to (bands, cols, rows)
+    
+        # Load ground truth labels
+        with h5py.File('./data/Houston/Houston13_7gt.mat', 'r') as f:
+            print("Houston13_7gt.mat keys:", list(f.keys()))
+            labels = np.array(f['map']).T  # transpose to match orientation if needed
 
     return data, labels
 
