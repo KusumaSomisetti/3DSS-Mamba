@@ -3,34 +3,34 @@ import math
 class DefaultConfigs(object):
     seed = 666
     # SGD
-    weight_decay = 5e-4
+    weight_decay = 1e-3         # updated
     momentum = 0.9
     # learning rate
-    init_lr = 0.01
+    init_lr = 0.001             # updated
     # training parameters
     train_epoch = 100
     test_epoch = 1
-    BATCH_SIZE_TRAIN = 64
+    BATCH_SIZE_TRAIN = 16       # updated
     norm_flag = True
     gpus = '0'
     # source data information
-    data = 'PaviaU'  # PaviaU / Indian / Houston2018-21  / Houston
+    data = 'Houston'  # PaviaU / Indian / Houston2018-21  / Houston
     num_classes = 9
     patch_size = 11
     pca_components = 30
     test_ratio = 0.9
     # model
     model_type = 'VideoMamba'     # LSFAT or LSFAT_WoCToken or LSFAT_Dilate or LSFAT_Shunted or transformer or 3DCNN
-    depth = 1
-    embed_dim = 32
-    dim_inner = 2*embed_dim
-    dt_rank = math.ceil(embed_dim/16)
+    depth = 4                     # updated
+    embed_dim = 96                # updated
+    dim_inner = 2 * embed_dim
+    dt_rank = math.ceil(embed_dim / 16)
     d_state = 16
     group_type = 'Cube'  # Linear  Patch  Cube
-    scan_type = 'Parallel spectral-spatial'  #Spectral-priority  #Spatial-priority  #Cross spectral-spatial  Parallel spectral-spatial #spatial-spectral   spectral-spatial   spectral  spatial
+    scan_type = 'Parallel spectral-spatial'  # Spectral-priority / Spatial-priority / Cross spectral-spatial / Parallel spectral-spatial / spatial-spectral / spectral-spatial / spectral / spatial
     k_group = 4
-    pos = False
-    cls = False
+    pos = True            # updated
+    cls = True            # updated
     # 3DConv parameters
     conv3D_channel = 32
     conv3D_kernel = (3, 5, 5)
