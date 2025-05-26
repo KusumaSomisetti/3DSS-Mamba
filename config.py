@@ -14,7 +14,7 @@ class DefaultConfigs(object):
     norm_flag = True
     gpus = '0'
     # source data information
-    data = 'PaviaU'  # PaviaU-9 / Indian-16  / Houston2018-21  / Houston2013-16
+    data = 'PaviaU'  # PaviaU / Indian / Houston2018-21  / Houston
     num_classes = 9
     patch_size = 11
     pca_components = 30
