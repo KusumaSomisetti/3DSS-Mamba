@@ -32,14 +32,15 @@ def loadData():
 
     elif config.data == 'Houston':
         # Load hyperspectral data
-        with h5py.File('./data/Houston/Houston13.mat', 'r') as f:
+        with h5py.File('/kaggle/input/houston/Houston13.mat', 'r') as f:
             print("Houston13.mat keys:", list(f.keys()))
             data = np.array(f['ori_data']).transpose(2, 1, 0)  # from (rows, cols, bands) to (bands, cols, rows)
     
         # Load ground truth labels
-        with h5py.File('./data/Houston/Houston13_7gt.mat', 'r') as f:
+        with h5py.File('/kaggle/input/houston/Houston13_7gt.mat', 'r') as f:
             print("Houston13_7gt.mat keys:", list(f.keys()))
             labels = np.array(f['map']).T  # transpose to match orientation if needed
+
 
     return data, labels
 
